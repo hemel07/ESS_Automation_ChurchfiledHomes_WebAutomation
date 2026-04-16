@@ -38,22 +38,23 @@ class ContactInfoPage(BasePage):
         selectors = selector.split(", ")
         for sel in selectors:
             try:
-                element = self.page.locator(sel)
-                if element.is_visible(timeout=2000):
+                element = self.page.locator(sel).first
+                element.wait_for(state="visible", timeout=10000)
+                element.click()
+                element.fill(value)
+                return
+            except Exception:
+                continue
+
+        # Fallback: try each selector with locator and fill directly
+        for sel in selectors:
+            try:
+                element = self.page.locator(sel).first
+                if element.count() > 0:
                     element.fill(value)
                     return
             except Exception:
                 continue
-
-        # Fallback: find by label text
-        if "First name" in selector:
-            self.page.fill('label:has-text("First name") + input', value)
-        elif "Last name" in selector:
-            self.page.fill('label:has-text("Last name") + input', value)
-        elif "Email" in selector:
-            self.page.fill('label:has-text("Email") + input', value)
-        elif "Mobile" in selector:
-            self.page.fill('label:has-text("Mobile") + input', value)
 
     def search_address(self, search_term: str):
         """Search for property address."""
@@ -96,8 +97,18 @@ class ContactInfoPage(BasePage):
             pass
 
     def click_next(self):
-        """Click Next button."""
-        self.click_text("Next")
+        """Click Next button on the contact info page.
+
+        Uses the specific button id to avoid strict-mode violations caused by
+        multiple elements containing the text 'Next' on the page.
+        """
+        try:
+            btn = self.page.locator('#chs_contact_next').first
+            btn.wait_for(state="visible", timeout=15000)
+            btn.click()
+        except Exception:
+            # Fallback: target submit button directly
+            self.page.locator('button[type="submit"]').first.click()
 
     def fill_contact_info(
         self,
@@ -107,10 +118,12 @@ class ContactInfoPage(BasePage):
         mobile: str,
         address: str = "Dublin",
     ):
-        """Fill all contact information."""
+        """Fill all contact information and click Next to submit."""
         self.fill_first_name(first_name)
         self.fill_last_name(last_name)
         self.fill_email(email)
         self.fill_mobile(mobile)
         self.search_address(address)
         self.select_address_from_dropdown()
+        self.page.wait_for_timeout(500)
+        self.click_next()

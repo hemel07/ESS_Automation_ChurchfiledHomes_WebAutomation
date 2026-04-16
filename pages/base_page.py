@@ -16,11 +16,11 @@ class BasePage:
         element.click()
 
     def click_text(self, text: str, exact: bool = False, timeout: int = 30000):
-        """Click an element by text content."""
+        """Click an element by text content (uses .first to avoid strict-mode violations)."""
         if exact:
-            locator = self.page.get_by_text(text, exact=True)
+            locator = self.page.get_by_text(text, exact=True).first
         else:
-            locator = self.page.get_by_text(text, exact=False)
+            locator = self.page.get_by_text(text, exact=False).first
         locator.wait_for(state="visible", timeout=timeout)
         locator.click()
 

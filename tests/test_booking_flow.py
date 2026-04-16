@@ -35,14 +35,18 @@ TEST_DATA = {
 
 @pytest.fixture
 def test_image_path():
-    """Provide path for test image upload."""
+    """Provide path for test image upload.
+
+    The image file is created on demand by PropertyDetailsPage._create_test_image()
+    if it does not already exist, so we only need to ensure the directory is present.
+    We intentionally do NOT delete the file after each test because multiple tests
+    in the session reuse the same path.
+    """
     test_dir = os.path.dirname(os.path.abspath(__file__))
     image_path = os.path.join(test_dir, "..", "test_data", "test_image.png")
     os.makedirs(os.path.dirname(image_path), exist_ok=True)
     yield image_path
-    # Cleanup after test
-    if os.path.exists(image_path):
-        os.remove(image_path)
+    # No cleanup — the file is reused across tests and created on demand.
 
 
 @pytest.mark.usefixtures("page")

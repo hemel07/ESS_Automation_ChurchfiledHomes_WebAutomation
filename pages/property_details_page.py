@@ -262,7 +262,7 @@ class PropertyDetailsPage(BasePage):
         plans_extension: bool = False,
         photo_path: str = None,
     ):
-        """Fill all property details form."""
+        """Fill all property details form and advance past the confirmation screen."""
         self.select_house_type(house_type)
         self.page.wait_for_timeout(200)
         self.select_storeys(storeys)
@@ -278,4 +278,15 @@ class PropertyDetailsPage(BasePage):
             self.upload_photo(photo_path)
             self.page.wait_for_timeout(500)
 
+        # First Next → lands on the confirmation/warm-home screen
         self.click_next()
+        self.page.wait_for_timeout(1000)
+
+        # Close any popup that appears on the confirmation screen
+        self.close_popup_if_exists()
+        self.page.wait_for_timeout(500)
+
+        # Second Next → advances to the contact information page
+        self.click_next()
+        self.page.wait_for_timeout(1000)
+
