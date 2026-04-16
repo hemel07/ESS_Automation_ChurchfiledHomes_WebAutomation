@@ -4,13 +4,13 @@
 
 ## Latest Run
 
-**Run Date:** 2026-04-16 15:27:29
+**Run Date:** 2026-04-16 15:57:49
 **Status:** ❌ Failed
-**Total Tests:** 5
-**Passed:** 3
+**Total Tests:** 2
+**Passed:** 0
 **Failed:** 2
 **Skipped:** 0
-**Duration:** 0:17:56
+**Duration:** 0:15:09
 
 ---
 
@@ -18,38 +18,33 @@
 
 | Date | Status | Passed | Failed | Skipped | Duration |
 |------|--------|--------|--------|---------|----------|
-| 2026-04-16 15:27:29 | ❌ Failed | 3 | 2 | 0 | 0:17:56 |
+| 2026-04-16 15:57:49 | ❌ Failed | 0 | 2 | 0 | 0:15:09 |
 
 ---
 
 ## Test Details
 
-### ✅ Passed Tests
-- `test_property_details_form[semi_2storey_ext]`
-- `test_property_details_form[detached_2storey_noext]`
-- `test_property_details_form[terraced_1storey_planext]`
-
 ### ❌ Failed Tests
 - `test_full_booking_flow`
   ```
-  self = <tests.test_booking_flow.TestHomeEnergyAssessmentBooking object at 0x11035e3f0>
+  self = <tests.test_booking_flow.TestHomeEnergyAssessmentBooking object at 0x1106d6190>
 page = <Page url='http://52.49.147.125:3005/one-stop-shop-service/home-energy-assessment/home-energy-assessment-calculator#tab-header'>
-home_page = <pages.home_page.HomePage object at 0x110a23360>
-property_details_page = <pages.property_details_page.PropertyDetailsPage object at 0x110a23490>
-contact_info_page = <pages.contact_info_page.ContactInfoPage object at 0x1106f56a0>
+home_page = <pages.home_page.HomePage object at 0x11076bcb0>
+property_details_page = <pages.property_details_page.PropertyDetailsPage object at 0x11076be00>
+contact_info_page = <pages.contact_info_page.ContactInfoPage object at 0x110a5c050>
 booking_page = <pages.booking_page.B...
   ```
 - `test_email_confirmation`
   ```
-  self = <tests.test_booking_flow.TestHomeEnergyAssessmentBooking object at 0x110363890>
+  self = <tests.test_booking_flow.TestHomeEnergyAssessmentBooking object at 0x1106db9b0>
 page = <Page url='http://52.49.147.125:3005/one-stop-shop-service/home-energy-assessment/home-energy-assessment-calculator#tab-header'>
-home_page = <pages.home_page.HomePage object at 0x1112f7100>
-property_details_page = <pages.property_details_page.PropertyDetailsPage object at 0x1112f7230>
-contact_info_page = <pages.contact_info_page.ContactInfoPage object at 0x111477ed0>
+home_page = <pages.home_page.HomePage object at 0x1110c42d0>
+property_details_page = <pages.property_details_page.PropertyDetailsPage object at 0x1110c4410>
+contact_info_page = <pages.contact_info_page.ContactInfoPage object at 0x1110c4cd0>
 booking_page = <pages.booking_page.B...
   ```
 
 
 ---
 
-*Last updated: 2026-04-16 15:27:29*
+*Last updated: 2026-04-16 15:57:49*
